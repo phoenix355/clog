@@ -1,3 +1,11 @@
+---
+tags: 
+  - vuepress
+  - 个人博客
+date: 2020-07-17
+author: 帅哥俊呀
+location: 广州
+---
 # vuepress 搭建个人博客
 > [VuePress](https://www.vuepress.cn/) 是一款使用 `Vue` 驱动的静态网站生成器，是 `Vue` 的作者 `尤雨溪` 为了方便文档的编写而开发的。VuePress采用的是[Markdown](https://zh.mweb.im/markdown-syntax-guide-full-version-zh.html)语法，这是一种轻量级标记语言，它允许人们使用易读易写的纯文本格式编写文档。
 ## 1、全局安装
