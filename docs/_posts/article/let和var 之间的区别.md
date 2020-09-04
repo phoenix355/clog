@@ -40,7 +40,7 @@ location: 广州图书馆
     ```
     0
     1
-    vue.runtime.esm.js?2b0e:1888 ReferenceError: i is not defined
+    ReferenceError: i is not defined
     ```
     这是因为 使用 `let` 定义的 `i` 的作用域是在 `for` 这个循环里之内。
 * 经典面试题
@@ -78,9 +78,9 @@ function forTestDiffOnVarAndLet() {
 这里强调的是同一个作用域，如果不属于同一个作用域则会报错：
 ``` js
 function wrapperFn() {
-        console.log(hello)
+        console.log(hello) // ReferenceError: hello is not defined
         function forTestVar() {
-            console.log(hello) // vue.runtime.esm.js?2b0e:1888 ReferenceError: hello is not defined
+            console.log(hello)
             var hello
         }
         forTestVar()
