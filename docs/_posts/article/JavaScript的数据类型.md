@@ -97,13 +97,52 @@ console.log(array[0].name + '' + array[2][0].name) // hello world
 console.log(typeof array1) // array
 ```
 ### Object
-几乎所有的对象都是 `Object` 构造函数的一个实例，当我们使用构造函数方法创建一个对象，我们可以从 `Object.prototype` 继承属性方法：
-
-    * 如果输入的值是 `null` 或 `undefined` 则会返回一个空对象 
-    * 如果输入的是一个基础类型，就会返回一个输入类型包装的对象
-    * 如果传进去的是引用类型的值，仍然会返回这个值，经他们复制的变量保有和源对象相同的引用地址
+几乎所有的对象都是 `Object` 构造函数的一个实例，当我们使用构造函数方法创建一个对象，我们可以从 `Object.prototype` 继承属性方法:
+* 如果输入的值是 `null` 或 `undefined` 则会返回一个空对象 
+* 如果输入的是一个基础类型，就会返回一个输入类型包装的对象
+* 如果传进去的是引用类型的值，仍然会返回这个值，经他们复制的变量保有和源对象相同的引用地址
     
-当以非构造函数形式调用时，`Object` 的行为相当于 `new Object()`。
+当以非构造函数形式调用时，`Object` 的行为相当于 `new Object()`。`JavaScrict` 的引用类型与基础类型的区别有一下几点：
+* 基础类型的变量是在栈内存中存储的，一个变量的栈内存大小比较固定
+* 引用类型的引用地址是在栈内存存储的，其值放置在堆内存中
+* 对象中的赋值一般指的是引用地址的赋值
+
+``` js
+let a = 1;
+let b = a;
+let a = 3; 
+console.log(a,b) // 3, 1
+let obj = {name:'xiaoming'}
+let obj1 = obj
+obj.name = 'lilei
+console.log(obj.name,obj1.name) // lilei,lilei
+```
+原因是obj的引用地址和obj1是一样的，都是指向 `{name：value}`，改变了obj里面的属性必将影响到obj1里面的属性，那么我们应该如何避免呢？我们可以使用深拷贝的方法来消除引用地址产生的影响。
+``` js
+1、JSON转换
+
+let newObj = JSON.parse(JSON.stringify(copyObj))
+缺点: 
+(1) 缺点无法拷贝函数
+(2) 无法拷贝对象原型链上的方法和属性
+
+2、从原型上拷贝属性
+
+function copyObject(orig) {
+  var copy = Object.create(Object.getPrototypeOf(orig))
+  copyOwnPropertiesFrom(copy, orig)
+  return copy
+}
+
+function copyOwnPropertiesFrom(target, source) {
+  Object.getOwnPropertyNames(source).forEach(function(propKey) {
+    var desc = Object.getOwnPropertyDescriptor(source, propKey)
+    Object.defineProperty(target, propKey, desc)
+  })
+  return target
+}
+```
+
 
 
 
